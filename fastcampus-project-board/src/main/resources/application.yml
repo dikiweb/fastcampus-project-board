@@ -1,0 +1,80 @@
+debug: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging.level:
+  root: INFO
+  SQL: DEBUG
+  com.fastcampus.projectboard: debug
+  org.springframework.web.servlet: debug
+  org.hibernate.sql: debug  # debug  trace
+  org.hibernate.type: trace
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/dikidev?useUnicode=true&characterEncoding=utf8
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: dikidev
+    password: hjc91070
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create #create, none, update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+        use_sql_comments: true
+    open-in-view: true
+
+    h2.console.enabled: false
+
+    sql.init.mode: always
+
+    #Encoding UTF-8
+    sql:
+      init:
+        encoding: utf-8
+
+    data:
+      web:
+        pageable:
+          default-page-size: 10
+      rest:
+        base-path: /api
+        detection-strategy: annotated
+
+    mvc:
+      hidden-method:
+        filter:
+          enabled: true
+
+    main:
+      allow-bean-definition-overriding: true
+
+    thymeleaf:
+      prefix: classpath:templates/
+      check-template-location: true
+      suffix: .html
+      mode: HTML
+      cache: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: testdb
+#  datasource:
+#    url: jdbc:h2:mem:board;mode=mysql
+#    driverClassName: org.h2.Driver
+#  sql:
+#    init:
+#      mode: always
+#  test.database.replace: none
