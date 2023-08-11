@@ -33,7 +33,7 @@ spring:
         use_sql_comments: true
     open-in-view: true
 
-    h2.console.enabled: false
+#    h2.console.enabled: false
 
     sql.init.mode: always
 
@@ -65,16 +65,3 @@ spring:
       mode: HTML
       cache: false
 
----
-
-spring:
-  config:
-    activate:
-      on-profile: testdb
-#  datasource:
-#    url: jdbc:h2:mem:board;mode=mysql
-#    driverClassName: org.h2.Driver
-#  sql:
-#    init:
-#      mode: always
-#  test.database.replace: none
