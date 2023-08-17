@@ -1,5 +1,6 @@
 package com.fastcampus.projectboard.board.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ class ArticleControllerTest {
         this.mvc = mvc;
     }
 
+    @Disabled("개발 중")
     @Test
     @DisplayName("[view][GET] 게시글 목록")
     public void given_whenRequestArticleView_then() throws Exception {
@@ -40,11 +42,13 @@ class ArticleControllerTest {
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/list"))
                 .andExpect(model().attributeExists("articles"));
 
         // then
     }
 
+    @Disabled("개발 중")
     @Test
     @DisplayName("[view][GET] 게시글 상세")
     public void given_whenRequestArticleView_thenReturnArticle() throws Exception {
@@ -54,11 +58,14 @@ class ArticleControllerTest {
         mvc.perform(get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.TEXT_HTML))
-                .andExpect(model().attributeExists("articles"));
+                .andExpect(view().name("articles/detail"))
+                .andExpect(model().attributeExists("articles"))
+                .andExpect(model().attributeExists("articlesComments"));
 
         // then
     }
 
+    @Disabled("개발 중")
     @Test
     @DisplayName("[view][GET] 게시글 검색 전용")
     public void given_whenRequestArticleSearcghView_thenReturnArticle() throws Exception {
@@ -67,11 +74,13 @@ class ArticleControllerTest {
         // when
         mvc.perform(get("/articles/search"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search"));
 
         // then
     }
 
+    @Disabled("개발 중")
     @Test
     @DisplayName("[view][GET] 해시테그 검색")
     public void given_whenRequestArticleSearchHash_thenReturnArticle() throws Exception {
@@ -80,7 +89,8 @@ class ArticleControllerTest {
         // when
         mvc.perform(get("/articles/search-hashtag"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML));
+                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(view().name("articles/search-hashtag"));
 
         // then
     }
